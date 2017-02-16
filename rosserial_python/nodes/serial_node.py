@@ -46,8 +46,8 @@ if __name__=="__main__":
     rospy.init_node("serial_node")
     rospy.loginfo("ROS Serial Python Node")
 
-    port_name = rospy.get_param('~port','/dev/ttyUSB0')
-    baud = int(rospy.get_param('~baud','57600'))
+    port_name = rospy.get_param('~port','/dev/ttyS0')
+    baud = int(rospy.get_param('~baud','115200'))
 
     # TODO: should these really be global?
     tcp_portnum = int(rospy.get_param('/rosserial_embeddedlinux/tcp_port', '11411'))
