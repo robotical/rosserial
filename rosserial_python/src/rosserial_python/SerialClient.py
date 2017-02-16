@@ -92,7 +92,8 @@ class Publisher:
     """
     def __init__(self, topic_info):
         """ Create a new publisher. """
-        self.topic = topic_info.topic_name
+        self.name = rospy.get_param('/name', '')
+        self.topic = "/" + self.name + topic_info.topic_name
 
         # find message type
         package, message = topic_info.message_type.split('/')
@@ -115,7 +116,8 @@ class Subscriber:
     """
 
     def __init__(self, topic_info, parent):
-        self.topic = topic_info.topic_name
+        self.name = rospy.get_param('/name', '')
+        self.topic = "/" + self.name + topic_info.topic_name
         self.id = topic_info.topic_id
         self.parent = parent
 
@@ -146,8 +148,10 @@ class ServiceServer:
     """
 
     def __init__(self, topic_info, parent):
-        self.topic = topic_info.topic_name
+        self.name = rospy.get_param('/name', '')
+        self.topic = "/" + self.name + topic_info.topic_name
         self.parent = parent
+	self.id = topic_info.topic_id
 
         # find message type
         package, service = topic_info.message_type.split('/')
@@ -188,8 +192,10 @@ class ServiceClient:
     """
 
     def __init__(self, topic_info, parent):
-        self.topic = topic_info.topic_name
+        self.name = rospy.get_param('/name', '')
+        self.topic = "/" + self.name + topic_info.topic_name
         self.parent = parent
+	self.id = topic_info.topic_id
 
         # find message type
         package, service = topic_info.message_type.split('/')
